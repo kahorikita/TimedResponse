@@ -121,18 +121,24 @@ end
 data.response = dsorted;
 data.RT = data.RT(I);
 data.initDir = data.initDir(I);
-data.ivel = data.ivel(I);
 data.pkVel = data.pkVel(I);
 data.tanVel = data.tanVel(I);
 data.Vel = data.Vel(I);
+data.Cr = data.Cr(I);
+data.iDir = data.iDir(I);
+data.init = data.init(I);
+data.ivel = data.ivel(I);
 
 % exlude catch trials
 data.response(find(data.RT==0))=[];
 data.initDir(find(data.RT==0)) = [];
-data.ivel(find(data.RT==0)) = [];
 data.pkVel(find(data.RT==0)) = [];
 data.tanVel(find(data.RT==0)) = [];
 data.Vel(find(data.RT==0)) = [];
+data.Cr(find(data.RT==0)) = [];
+data.iDir(find(data.RT==0)) = [];
+data.init(find(data.RT==0)) = [];
+data.ivel(find(data.RT==0)) = [];
 data.RT(find(data.RT==0))=[];
 
 % model fit

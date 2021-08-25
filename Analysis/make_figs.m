@@ -134,7 +134,8 @@ legend({'Fast-data','Fast-model','Medium-data','Medium-model','Slow-data','Slow-
 
 %% Velocity and RT 
 
-fhandle = figure(6); clf; hold on
+% fhandle = figure(6); clf; hold on
+fhandle = figure(7); clf; hold on
 set(fhandle, 'Position', [200, 100, 500, 350]); 
 set(fhandle, 'Color','w') 
 
@@ -163,13 +164,15 @@ for cnd = 1:4 % 1:fast, 2:med, 3:slow, 4:p2p
         end
     end   
     
-    figure(6); hold on;
-%     scatter(maxyVel*Hz,model*1000,sz,'MarkerEdgeColor',col{cnd},'MarkerFaceColor',col{cnd}); 
-%     plot([nanmean(maxyVel)*Hz-nanstd(maxyVel)*Hz nanmean(maxyVel)*Hz+nanstd(maxyVel)*Hz],[nanmean(model)*1000 nanmean(model)*1000],'Color',col{cnd},'Linewidth',2);
-%     plot([nanmean(maxyVel)*Hz nanmean(maxyVel)*Hz],[nanmean(model)*1000-nanstd(model)*1000 nanmean(model)*1000+nanstd(model)*1000],'Color',col{cnd},'Linewidth',2);
-    p(cnd) = scatter(dAll{cnd}.maxyVel*Hz,dAll{cnd}.model*1000,sz,'MarkerEdgeColor',col{cnd},'MarkerFaceColor',col{cnd});
-    plot([nanmean(dAll{cnd}.maxyVel)*Hz-nanstd(dAll{cnd}.maxyVel)*Hz nanmean(dAll{cnd}.maxyVel)*Hz+nanstd(dAll{cnd}.maxyVel)*Hz],[nanmean(dAll{cnd}.model)*1000 nanmean(dAll{cnd}.model)*1000],'Color',col{cnd},'Linewidth',2);
-    plot([nanmean(dAll{cnd}.maxyVel)*Hz nanmean(dAll{cnd}.maxyVel)*Hz],[nanmean(dAll{cnd}.model)*1000-nanstd(dAll{cnd}.model)*1000 nanmean(dAll{cnd}.model)*1000+nanstd(dAll{cnd}.model)*1000],'Color',col{cnd},'Linewidth',2);
+    figure(7); hold on;
+    p(cnd) = scatter(maxyVel*Hz,model*1000,sz,'MarkerEdgeColor',col{cnd},'MarkerFaceColor',col{cnd}); 
+    plot([nanmean(maxyVel)*Hz-nanstd(maxyVel)*Hz nanmean(maxyVel)*Hz+nanstd(maxyVel)*Hz],[nanmean(model)*1000 nanmean(model)*1000],'Color',col{cnd},'Linewidth',2);
+    plot([nanmean(maxyVel)*Hz nanmean(maxyVel)*Hz],[nanmean(model)*1000-nanstd(model)*1000 nanmean(model)*1000+nanstd(model)*1000],'Color',col{cnd},'Linewidth',2);
+
+%     figure(6); hold on;
+%     p(cnd) = scatter(dAll{cnd}.maxyVel*Hz,dAll{cnd}.model*1000,sz,'MarkerEdgeColor',col{cnd},'MarkerFaceColor',col{cnd});
+%     plot([nanmean(dAll{cnd}.maxyVel)*Hz-nanstd(dAll{cnd}.maxyVel)*Hz nanmean(dAll{cnd}.maxyVel)*Hz+nanstd(dAll{cnd}.maxyVel)*Hz],[nanmean(dAll{cnd}.model)*1000 nanmean(dAll{cnd}.model)*1000],'Color',col{cnd},'Linewidth',2);
+%     plot([nanmean(dAll{cnd}.maxyVel)*Hz nanmean(dAll{cnd}.maxyVel)*Hz],[nanmean(dAll{cnd}.model)*1000-nanstd(dAll{cnd}.model)*1000 nanmean(dAll{cnd}.model)*1000+nanstd(dAll{cnd}.model)*1000],'Color',col{cnd},'Linewidth',2);
     xlabel('Peak Velocity (m/s)','fontsize',16)
     ylabel('Decision-making Time (ms)','fontsize',16)
     set(gca,'FontSize',16);
