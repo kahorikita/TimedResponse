@@ -58,8 +58,16 @@ end
 d = compactify_data(d_full);
 dAll = groupAnalysis(d);
 
-save TimedResponseData d_full
-save TimedResponse_compact d
-save TimedResponse_dAll dAll
+% save TimedResponseData d_full
+% save TimedResponse_compact d
+% save TimedResponse_dAll dAll
+
+% save ang45_TimedResponseData d_full
+% save ang45_TimedResponse_compact d
+% save ang45_TimedResponse_dAll dAll
+
+save time100_TimedResponseData d_full
+save time100_TimedResponse_compact d
+save time100_TimedResponse_dAll dAll
 
 disp('All Done')

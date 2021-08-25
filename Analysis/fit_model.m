@@ -4,8 +4,9 @@ function [model, pr_fitted, sliding] = fit_model(RT,response)
 sigma = .1; % slope .1
 mu = .4; % middle of slope .4
 AE = .95; % asymptotic error [upper, lower];
-alpha = 0.2; % 0.1, regularization parameter % 500, 1000 %%%%%%% changed from original code from Adrian = 5
-slope0 = 0.0002; % 0.0001, slope prior %%%%%%% changed from original code from Adrian = .05
+alpha = 0.2; % 0.1, regularization parameter 
+slope0 = 0.0002; % 0.0001, slope prior 
+initAng = 22.5; % error angle, 22.5 or 45 %%%%%%%%%%%
 
 % parameters for visualization
 xplot = [.001:.001:1.2]; % x values to compute the sliding window over
@@ -18,7 +19,11 @@ hit(hit~=1) = 0; % error->0
 pInit = [mu sigma AE];
     
 %- log-likelihood of all data
-phit = @(params,t) 1/8 + (params(3) - 1/8)*normcdf(t,params(1),params(2)); %%%%%%%%%%%%% 4 = num of targets
+if initAng == 22.5
+    phit = @(params,t) 1/8 + (params(3) - 1/8)*normcdf(t,params(1),params(2)); %%%%%%%%%%%%% initAng = 22.5
+elseif initAng == 45
+    phit = @(params,t) 1/4 + (params(3) - 1/4)*normcdf(t,params(1),params(2)); %%%%%%%%%%%%% initAng = 45, 4 = num of targets
+end
 % LL = @(params) -sum(hit.*log(phit(params,RT)) + (1-hit).*log(1-phit(params,RT))) + alpha*abs(params(2)); % delete slope
 LL = @(params) -sum(hit.*log(phit(params,RT)) + (1-hit).*log(1-phit(params,RT))) + alpha*(params(2)-slope0)^2;
 LL([mu sigma AE]);

@@ -2,13 +2,13 @@ function data = processData(data)
 % analyze cursor data for path length, RT, etc smooth trajectories
 
 
-cutoffdeg = 15; % 40, 15 in NCM 
-timeth = 6; % 6:50msec, 13:100msec
+cutoffdeg = 15; % 15 in NCM 
+timeth = 13; % 6:50msec, 13:100msec
+initAng = 22.5; % 22.5 or 45
 
 errorcount = 1;
 errortr = 0;
 mcount = 1;
-res = [];
 
 for i = 1:data.Ntrials
     
@@ -70,12 +70,6 @@ for i = 1:data.Ntrials
      if data.initDir(i) < -225
          data.initDir(i) = data.initDir(i) + 360;
      end     
-%      % data.response = vector of responses, 1:correct response, 2:error
-%      if data.initDir(i) > -22.5 && data.initDir(i) < 22.5 % correct
-%          res(i) = 1;
-%      else % error
-%          res(i) = 2;
-%      end
      
     % compute preparation time, initvel time - time when target is appeared
     data.RT(i) = (data.time{1,i}(data.ivel(1,i),1) - data.time{1,i}(data.go(1,i),1)) - data.tFile(i,5);
@@ -88,7 +82,7 @@ for i = 1:data.Ntrials
     % find too curved trajectory at movement onset
     judgep = data.ivel(i) + timeth; % ivel+50msec 
     icount = 1;
-    for j = judgep : judgep + timeth % onset+50msec~100msec
+    for j = judgep : judgep + 6 % onset+50 or 100 msec ~ (6: duration, 50 ms)
         % get initial angle change (arctan2)
         initDir1 = rad2deg(atan2(data.Vel{i}(j-1,2),data.Vel{i}(j-1,1))); %data.initDir=angle[deg]
         initDir2 = rad2deg(atan2(data.Vel{i}(j-2,2),data.Vel{i}(j-2,1))); %data.initDir=angle[deg]
@@ -98,7 +92,7 @@ for i = 1:data.Ntrials
     data.diffDirs(i) = mean(diffDir1Dir2);
     
     % correct-select, correct-reject or error trials
-    if data.initDir(i) > -22.5 && data.initDir(i) < 22.5 
+    if data.initDir(i) > -initAng && data.initDir(i) < initAng 
         if data.diffDirs(i) > cutoffdeg || data.RT(i) == 0 || max(data.Cr{i}(:,2)) < 0.05
             data.response(i) = 2; % correct-reject
         elseif data.RT(i) ~= 0

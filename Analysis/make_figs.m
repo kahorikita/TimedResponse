@@ -2,7 +2,9 @@
 clear
 clc
 addpath ../functions
-load TimedResponse_dAll.mat
+% load TimedResponse_dAll.mat
+% load ang45_TimedResponse_dAll.mat
+load time100_TimedResponse_dAll.mat
 
 Hz = 130; % sampling frequency
 bin = 7.7; % msec

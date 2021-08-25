@@ -4,7 +4,9 @@ clear
 clc
 close all
 
-load TimedResponse_compact.mat
+% load TimedResponse_compact.mat
+% load ang45_TimedResponse_compact.mat
+load time100_TimedResponse_compact.mat
 
 %% look at raw scatter plots
 
